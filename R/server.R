@@ -45,4 +45,22 @@ server <- function(input, output, session){
   })
 
   generate_server(stack3)
+
+  observeEvent(input$newTab, {
+    showModal(
+      modalDialog(
+       textInput("newTabText", "Title"),
+       actionButton("newTabAccept", "Accept")
+      )
+    )
+  })
+
+  observeEvent(input$insertTab, {
+    removeModal()
+
+    insert_sidebar_item(
+      input$insertTab,
+      div()
+    )
+  })
 }

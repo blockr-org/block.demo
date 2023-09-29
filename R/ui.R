@@ -15,7 +15,11 @@ ui <- function(req){
 	bmsPage(
     navbar = navbar(
       title = "Example application",
-      navbarItem("Profile")
+      navbar_right = navbarRight(
+        navbarItem(
+          actionButton("newTab", "", icon = shiny::icon("plus"))
+        )
+      )
     ),
     sidebar = sidebar(
       title = h3("Menu", class = "mt-0 pt-0"),
@@ -45,6 +49,12 @@ ui <- function(req){
       sidebarItem(
         "Basic",
         basicUI("basic")
+      ),
+      sidebarItemAny(
+        buttonTextInput(
+          "insertTab",
+          "Add tab"
+        )
       )
     )
 	)
