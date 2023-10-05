@@ -4,12 +4,7 @@
 \alias{assets}
 \title{Assets}
 \usage{
-assets(ignore = NULL)
-}
-\arguments{
-\item{ignore}{A vector of files to ignore.
-This can be useful for scripts that should not be
-placed in the \verb{<head>} of the HTML.}
+assets()
 }
 \description{
 Includes all assets.

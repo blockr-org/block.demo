@@ -1,0 +1,15 @@
+.remove-row{
+  display: none;
+}
+
+.masonry-row:hover .remove-row{
+  display: block;
+}
+
+.masonry-item:hover .remove-row{
+  display: block;
+}
+
+.masonry-grid:hover{
+  background: var(--bs-secondary)
+}

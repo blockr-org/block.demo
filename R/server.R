@@ -10,57 +10,19 @@
 #' @keywords internal
 server <- function(input, output, session){
 	send_message <- make_send_message(session)	
-  masonry_server("masonry")
-  basic_server("basic")
-
-  stack1 <- new_stack(
-    new_data_block,
-    new_filter_block
-  )
-
-  output$stack1 <- renderUI({
-    block.shiny::generate_ui(stack1)
-  })
-
-  generate_server(stack1)
-
-  stack2 <- new_stack(
-    new_data_block,
-    new_filter_block
-  )
-
-  output$stack2 <- renderUI({
-    block.shiny::generate_ui(stack2)
-  })
-
-  generate_server(stack2)
-
-  stack3 <- new_stack(
-    new_data_block,
-    new_filter_block
-  )
-
-  output$stack3 <- renderUI({
-    block.shiny::generate_ui(stack3)
-  })
-
-  generate_server(stack3)
-
-  observeEvent(input$newTab, {
-    showModal(
-      modalDialog(
-       textInput("newTabText", "Title"),
-       actionButton("newTabAccept", "Accept")
-      )
-    )
-  })
 
   observeEvent(input$insertTab, {
-    removeModal()
+    if(input$insertTab == "")
+      return()
 
     insert_sidebar_item(
       input$insertTab,
-      div()
+      dashModuleUI(input$insertTab)
     )
+
+    select_sidebar_item(input$insertTab)
+
+    dash_module_server(input$insertTab)
+    mason(sprintf("#%s-grid", gsub(" ", "", input$insertTab)))
   })
 }

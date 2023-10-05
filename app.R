@@ -8,4 +8,4 @@ pkgload::load_all(
 
 library(blockr)
 
-run()
+run(options = list(port = 3000L))

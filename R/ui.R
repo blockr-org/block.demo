@@ -12,46 +12,42 @@
 #' 
 #' @keywords internal
 ui <- function(req){
+  assets()
+
 	bmsPage(
+    masonryDependencies(),
+    tags$head(
+      tags$script(src = "static/add-stack.js"),
+      tags$link(rel = "stylesheet", href = "static/styles.css")
+    ),
     navbar = navbar(
-      title = "Example application",
-      navbar_right = navbarRight(
-        navbarItem(
-          actionButton("newTab", "", icon = shiny::icon("plus"))
-        )
+      title = "Block R",
+      navbarItem(
+        actionButton("newTab", "", icon = shiny::icon("plus"))
       )
     ),
     sidebar = sidebar(
       title = h3("Menu", class = "mt-0 pt-0"),
       sidebarItem(
         "Home",
-        tagList(
-          h1("Masonry"),
-          masonryGrid(
-            id = "firstGrid",
-            masonryRow(
-              class = "bg-dark text-dark",
-              masonryItem(uiOutput("stack1"))
-            ),
-            masonryRow(
-              class = "bg-dark text-dark",
-              masonryItem(uiOutput("stack2")),
-              masonryItem(uiOutput("stack3"))
-            ),
-            options = list(margin = ".5rem")
+        div(
+          class = "p-4",
+          div(
+            class = "card bg-secondary",
+            div(
+              class = "card-body",
+              h1("Block R"),
+              h2("Build, transform, visualise"),
+              p(
+                "Use the block system to transform your data",
+                "and visualise it."
+              )
+            )
           )
         )
       ),
-      sidebarItem(
-        "Masrony",
-        masonryUI("masonry")
-      ),
-      sidebarItem(
-        "Basic",
-        basicUI("basic")
-      ),
       sidebarItemAny(
-        buttonTextInput(
+        togglerTextInput(
           "insertTab",
           "Add tab"
         )
@@ -67,19 +63,16 @@ ui <- function(req){
 #' [serveAssets] and allows easily adding additional
 #' remote dependencies (e.g.: CDN) should there be any.
 #' 
-#' @param ignore A vector of files to ignore.
-#' This can be useful for scripts that should not be 
-#' placed in the `<head>` of the HTML.
-#' 
 #' @importFrom shiny tags
 #' 
 #' @keywords internal
-assets <- function(ignore = NULL){
-	list(
-		serveAssets(ignore = ignore), # base assets (assets.R)
-		tags$head(
-			# Place any additional depdendencies here
-			# e.g.: CDN
-		)	
-	)
+assets <- function(){
+  addResourcePath("static", system.file("assets", package = "block.demo"))
+}
+
+make_id <- function(){
+  c(letters, 1:9) |>
+    sample() |>
+    (\(.) paste0(., collapse = ""))() |>
+    (\(.) sprintf("_%s", .))()
 }

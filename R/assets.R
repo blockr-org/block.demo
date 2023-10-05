@@ -68,6 +68,8 @@ serveAssets <- function(modules = NULL, ignore = c()){
 		dependencies <- append(dependencies, list(modules))
 	}
 
+  print(dependencies)
+
 	return(dependencies)
 }
 
