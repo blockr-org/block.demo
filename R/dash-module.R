@@ -52,12 +52,21 @@ dash_module_server <- function(id){
         )
       })
 
+      stacks <- list()
+
       observeEvent(input$addStack, {
+        ...stack <- new_stack(
+          new_data_block,
+          new_select_block
+        )
         masonry_add_item(
           sprintf("#%s-grid", gsub(" ", "", id)), 
           row_id = sprintf("#%s", input$addStack),
-          item = card(h1("Stack"))
+          item = generate_ui(...stack)
         )
+
+        ...server <- generate_server(...stack)
+        stacks <<- append(stacks, list(stack = ...stack, server = ...server))
       })
     }
   )
@@ -84,7 +93,7 @@ newRow <- function(...){
 newRowRemoveUI <- function(){
   tags$button(
     icon("times"),
-    class = "btn bg-danger my-2 remove-row",
+    class = "btn bg-danger my-2 remove-row text-white",
     style = "margin-left:auto;"
   )
 }

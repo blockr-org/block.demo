@@ -6,6 +6,8 @@ pkgload::load_all(
 	helpers = FALSE
 )
 
-library(blockr)
+library(blockr.data)
+
+options(shiny.fullstracktrace = TRUE)
 
 run(options = list(port = 3000L))
