@@ -22,8 +22,14 @@ ui <- function(req){
     ),
     navbar = navbar(
       title = "Block R",
+      alignment = "right",
+      fixed = TRUE,
       navbarItem(
-        actionButton("newTab", "", icon = shiny::icon("plus"))
+        tags$button(
+          class = "btn btn-secondary add-stack",
+          "Stack",
+          icon("plus")
+        )
       )
     ),
     sidebar = sidebar(

@@ -5,9 +5,9 @@ dashModuleUI <- function(id){
     class = "p-4 dash-page",
     `data-ns` = ns(NULL),
     div(
-      class = "row",
+      class = "d-flex",
       div(
-        class = "col-md-8",
+        class = "flex-grow-1",
         togglerTextInput(
           make_id(),
           h1(id),
@@ -16,18 +16,18 @@ dashModuleUI <- function(id){
         )
       ),
       div(
-        class = "col-md-4",
-        actionButton(ns("addRow"), "Row", icon = icon("plus"), class = "bg-secondary"),
-        tags$button(
-          class = "btn btn-secondary add-stack",
-          "Stack",
-          icon("plus")
-        )
+        class = "flex-shrink-1",
+        actionButton(ns("addRow"), "Row", icon = icon("plus"), class = "bg-secondary")
       )
+    ),
+    togglerTextInput(
+      make_id(),
+      p("Description"),
+      value = "Page description",
+      restore = TRUE
     ),
     masonryGrid(
       id = sprintf("%s-grid", gsub(" ", "", id)),
-      newRow(),
       styles = list(
         rows = list(
           margin = "1rem",
@@ -84,7 +84,7 @@ newRow <- function(...){
 newRowRemoveUI <- function(){
   tags$button(
     icon("times"),
-    class = "btn bg-danger remove-row",
+    class = "btn bg-danger my-2 remove-row",
     style = "margin-left:auto;"
   )
 }
