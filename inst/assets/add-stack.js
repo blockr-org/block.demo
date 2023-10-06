@@ -21,7 +21,6 @@ $(() => {
     const sortable = new Sortable(
       draggable[0],
       {
-        draggable: "i",
         onStart: (evt) => {
           $(".masonry-row").addClass("bg-secondary");
         },
