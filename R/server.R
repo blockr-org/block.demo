@@ -25,4 +25,8 @@ server <- function(input, output, session){
     dash_module_server(input$insertTab)
     mason(sprintf("#%s-grid", gsub(" ", "", input$insertTab)))
   })
+
+  observeEvent(input$addBlock, {
+    offcanvas_show("blocks-offcanvas")
+  })
 }

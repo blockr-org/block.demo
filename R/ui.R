@@ -8,6 +8,7 @@
 #' @import bmsui
 #' @import masonry
 #' @import blockr
+#' @import bsutils
 #' @importFrom bslib bs_theme
 #' 
 #' @keywords internal
@@ -29,6 +30,13 @@ ui <- function(req){
           class = "btn btn-secondary add-stack",
           "Stack",
           icon("plus")
+        )
+      ),
+      navbarItem(
+        actionButton(
+          "addBlock",
+          class = "button-secondary",
+          "Blocks"
         )
       )
     ),
@@ -58,6 +66,22 @@ ui <- function(req){
           "Add tab"
         )
       )
+    ),
+    offcanvasContent(
+      id = "blocks-offcanvas",
+      .position = "bottom",
+      offcanvasHeader("Block"),
+      blockPill(
+        "Select"
+      ),
+      blockPill(
+        "Filter",
+        color = "info"
+      ),
+      blockPill(
+        "Plot",
+        color = "warning"
+      )
     )
 	)
 }
@@ -81,4 +105,8 @@ make_id <- function(){
     sample() |>
     (\(.) paste0(., collapse = ""))() |>
     (\(.) sprintf("_%s", .))()
+}
+
+blockPill <- function(title, type = tolower(title), color = "primary"){
+  span(title, `data-type` = type, class = sprintf("badge rounded-pill add-block bg-%s", color))
 }

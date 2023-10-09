@@ -70,7 +70,22 @@ dash_module_server <- function(id){
         )
 
         ...server <- generate_server(...stack, id = gsub(" ", "", id))
-        stacks <<- append(stacks, list(stack = ...stack, server = ...server))
+        stacks <<- append(stacks, list(list(id = gsub(" ", "", id), stack = ...stack, server = ...server)))
+      })
+
+      observeEvent(input$addBlock, {
+        print(input$addBlock)
+
+        stack <- stacks |> purrr::keep(\(block){
+          block$id == input$addBlock$id
+        })
+
+        block <- plot_block
+        if(input$addBlock$type == "filter")
+          block <- filter_block
+
+        if(input$addBlock$type == "select")
+          block <- select_block
       })
     }
   )

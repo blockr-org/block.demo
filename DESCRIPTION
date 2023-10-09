@@ -17,9 +17,12 @@ Imports:
     masonry,
     blockr,
     bmsui,
+    bsutils,
+    purrr
 Suggests: 
   pkgload
 Remotes:
   blockr-org/masonry,
   blockr-org/block.shiny,
-  blockr-org/bmsui
+  blockr-org/bmsui,
+  JohnCoene/bsutils

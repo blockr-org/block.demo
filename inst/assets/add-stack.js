@@ -42,4 +42,33 @@ $(() => {
       },
     );
   }, 300);
+
+
+  setTimeout(() => {
+    const draggable = $(document).find(".offcanvas-body");
+
+    const sortable = new Sortable(
+      draggable[0],
+      {
+        draggable: ".add-block",
+        onEnd: (evt) => {
+          console.log(evt);
+          let id = $(evt.explicitOriginalTarget).closest(".accordion").attr("id").split("-")[0];
+
+          const ns = $(evt.explicitOriginalTarget).closest(".dash-page").data(
+            "ns",
+          );
+
+          Shiny.setInputValue(
+            `${ns}-addBlock`, 
+            {
+              id: id,
+              type: $(evt.item).data("type")
+            }, 
+            { priority: "event" }
+          );
+        },
+      },
+    );
+  }, 300);
 });
