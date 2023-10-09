@@ -45,6 +45,8 @@ dash_module_server <- function(id){
   moduleServer(
     id, 
     function(input, output, session){
+      ns <- session$ns
+
       observeEvent(input$addRow, {
         masonry_add_row(
           sprintf("#%s-grid", gsub(" ", "", id)), 
@@ -56,16 +58,18 @@ dash_module_server <- function(id){
 
       observeEvent(input$addStack, {
         ...stack <- new_stack(
-          new_data_block,
-          new_select_block
+          data_block,
+          filter_block,
+          plot_block
         )
+        
         masonry_add_item(
           sprintf("#%s-grid", gsub(" ", "", id)), 
           row_id = sprintf("#%s", input$addStack),
-          item = generate_ui(...stack)
+          item = generate_ui(...stack, id = gsub(" ", "", ns(id)))
         )
 
-        ...server <- generate_server(...stack)
+        ...server <- generate_server(...stack, id = gsub(" ", "", id))
         stacks <<- append(stacks, list(stack = ...stack, server = ...server))
       })
     }
