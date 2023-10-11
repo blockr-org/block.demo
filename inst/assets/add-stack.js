@@ -18,13 +18,13 @@ $(() => {
   setTimeout(() => {
     const draggable = $(document).find(".add-stack");
 
-    const sortable = new Sortable(
+    sortable = new Sortable(
       draggable[0],
       {
-        onStart: (evt) => {
+        onStart: () => {
           $(".masonry-row").addClass("bg-secondary");
         },
-        onUnchoose: (evt) => {
+        onUnchoose: () => {
           $(".masonry-row").removeClass("bg-secondary");
         },
         onEnd: (evt) => {
@@ -32,7 +32,7 @@ $(() => {
             "bg-secondary",
           );
 
-          let rowID = $(evt.explicitOriginalTarget).closest(".masonry-row")
+          const rowID = $(evt.explicitOriginalTarget).closest(".masonry-row")
             .attr("id");
           const ns = $(evt.explicitOriginalTarget).closest(".dash-page").data(
             "ns",
@@ -43,29 +43,44 @@ $(() => {
     );
   }, 300);
 
-
   setTimeout(() => {
     const draggable = $(document).find(".offcanvas-body");
 
-    const sortable = new Sortable(
+    new Sortable(
       draggable[0],
       {
         draggable: ".add-block",
         onEnd: (evt) => {
-          console.log(evt);
-          let id = $(evt.explicitOriginalTarget).closest(".accordion").attr("id").split("-")[0];
+          const stackId =
+            $(evt.explicitOriginalTarget).closest(".accordion").attr("id")
+              .split("-")[0];
+
+          const blockId = $(evt.explicitOriginalTarget).closest(".block").data(
+            "value",
+          );
+
+          let blockIndex;
+          $(evt.explicitOriginalTarget).closest(".accordion").find(
+            ".block",
+          ).each((index, el) => {
+            if ($(el).data("value") == blockId) {
+              blockIndex = index + 1;
+            }
+          });
 
           const ns = $(evt.explicitOriginalTarget).closest(".dash-page").data(
             "ns",
           );
 
           Shiny.setInputValue(
-            `${ns}-addBlock`, 
+            `${ns}-addBlock`,
             {
-              id: id,
-              type: $(evt.item).data("type")
-            }, 
-            { priority: "event" }
+              stackId: stackId,
+              blockId: blockId,
+              blockIndex: blockIndex,
+              type: $(evt.item).data("type"),
+            },
+            { priority: "event" },
           );
         },
       },

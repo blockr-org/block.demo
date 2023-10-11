@@ -46,6 +46,9 @@ dash_module_server <- function(id){
     id, 
     function(input, output, session){
       ns <- session$ns
+      # TODO: move to observe on add as 
+      # this is currently shared by all stacks
+      rvs <- reactiveValues(new_blocks = NULL)
 
       observeEvent(input$addRow, {
         masonry_add_row(
@@ -69,7 +72,12 @@ dash_module_server <- function(id){
           item = generate_ui(...stack, id = gsub(" ", "", ns(id)))
         )
 
-        ...server <- generate_server(...stack, id = gsub(" ", "", id))
+        ...server <- generate_server(
+          ...stack, 
+          id = gsub(" ", "", id), 
+          new_blocks = rvs$new_blocks
+        )
+
         stacks <<- append(stacks, list(list(id = gsub(" ", "", id), stack = ...stack, server = ...server)))
       })
 
@@ -77,7 +85,7 @@ dash_module_server <- function(id){
         print(input$addBlock)
 
         stack <- stacks |> purrr::keep(\(block){
-          block$id == input$addBlock$id
+          block$id == input$addBlock$stackId
         })
 
         block <- plot_block
@@ -86,6 +94,11 @@ dash_module_server <- function(id){
 
         if(input$addBlock$type == "select")
           block <- select_block
+
+        rvs$new_blocks <- list(
+          block = block,
+          position = input$addBlock$blockIndex + 1L
+        )
       })
     }
   )
