@@ -83,6 +83,12 @@ dash_module_server <- function(id){
           if(input$addBlock$type == "select")
             block <- select_block
 
+          if(input$addBlock$type == "group_by")
+            block <- group_by_block
+
+          if(input$addBlock$type == "summarize")
+            block <- summarize_block
+
           list(
             block = block,
             position = input$addBlock$blockIndex

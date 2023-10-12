@@ -82,6 +82,15 @@ ui <- function(req){
       blockPill(
         "Plot",
         color = "warning"
+      ),
+      blockPill(
+        "Group by",
+        type = "group_by",
+        color = "success"
+      ),
+      blockPill(
+        "Summarize",
+        color = "danger"
       )
     )
 	)
