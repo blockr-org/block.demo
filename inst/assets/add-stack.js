@@ -53,7 +53,7 @@ $(() => {
         onEnd: (evt) => {
           const stackId =
             $(evt.explicitOriginalTarget).closest(".accordion").attr("id")
-              .split("-")[0];
+              .split("-")[1];
 
           const blockId = $(evt.explicitOriginalTarget).closest(".block").data(
             "value",

@@ -46,9 +46,6 @@ dash_module_server <- function(id){
     id, 
     function(input, output, session){
       ns <- session$ns
-      # TODO: move to observe on add as 
-      # this is currently shared by all stacks
-      rvs <- reactiveValues(new_blocks = NULL)
 
       observeEvent(input$addRow, {
         masonry_add_row(
@@ -57,56 +54,46 @@ dash_module_server <- function(id){
         )
       })
 
-      stacks <- list()
-
       observeEvent(input$addStack, {
-        ...stack <- new_stack(
-          data_block,
-          filter_block,
-          plot_block
+        stack_id <- make_id()
+
+        stack <- new_stack(
+          data_block
         )
         
         masonry_add_item(
           sprintf("#%s-grid", gsub(" ", "", id)), 
           row_id = sprintf("#%s", input$addStack),
-          item = generate_ui(...stack, id = gsub(" ", "", ns(id)))
+          item = generate_ui(stack, id = ns(stack_id))
         )
 
         rvs <- reactiveValues(new_blocks = NULL)
 
-        ...server <- generate_server(
-          ...stack, 
-          id = gsub(" ", "", id), 
+        server <- generate_server(
+          stack, 
+          id = stack_id,
           new_blocks = rvs$new_blocks
         )
 
-        stacks <<- append(stacks, list(
-          list(
-            id = gsub(" ", "", id), 
-            rvs = rvs,
-            stack = ...stack, server = ...server)
+        observeEvent(input$addBlock, {
+          # it's for another stack
+          if(input$addBlock$stackId != stack_id)
+            return()
+
+          print(input$addBlock)
+
+          block <- plot_block
+          if(input$addBlock$type == "filter")
+            block <- filter_block
+
+          if(input$addBlock$type == "select")
+            block <- select_block
+
+          rvs$new_blocks <- list(
+            block = block,
+            position = input$addBlock$blockIndex
           )
-        )
-      })
-
-      observeEvent(input$addBlock, {
-        print(input$addBlock)
-
-        stack <- stacks |> purrr::keep(\(block){
-          block$id == input$addBlock$stackId
         })
-
-        block <- plot_block
-        if(input$addBlock$type == "filter")
-          block <- filter_block
-
-        if(input$addBlock$type == "select")
-          block <- select_block
-
-        stack$rvs$new_blocks <- list(
-          block = block,
-          position = input$addBlock$blockIndex + 1L
-        )
       })
     }
   )
