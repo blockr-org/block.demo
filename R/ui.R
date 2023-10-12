@@ -125,7 +125,7 @@ ui <- function(req){
       class = "toast-container position-fixed bottom-0 end-0 p-3",
       div(
         id = "toast",
-        class = "toast text-bg-warning",
+        class = "toast text-bg-secondary",
         div(
           class = "toast-body",
           id = "toast-body",
