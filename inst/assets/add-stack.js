@@ -1,4 +1,8 @@
 $(() => {
+  const toast = bootstrap.Toast.getOrCreateInstance(
+    document.getElementById("toast"),
+  );
+
   $(document).on("masonry:added-row", (e) => {
     $(`#${e.detail}`).addClass("bg-secondary");
     setTimeout(() => {
@@ -50,46 +54,57 @@ $(() => {
   }, 300);
 
   setTimeout(() => {
-    const draggable = $(document).find(".offcanvas-body");
+    // for some reason sortable.js only works on direct children
+    // so we look over wrappers
+    $(document).find(".offcanvas-body").find(
+      ".block-wrapper",
+    ).each((_, el) => {
+      new Sortable(
+        el,
+        {
+          draggable: ".add-block",
+          onEnd: (evt) => {
+            const $stack = $(evt.explicitOriginalTarget).closest(".accordion");
+            if (!$stack.length) {
+              $("#toast-body").text("Blocks must be dropped within a stack");
+              toast.show();
+              return;
+            }
 
-    new Sortable(
-      draggable[0],
-      {
-        draggable: ".add-block",
-        onEnd: (evt) => {
-          const stackId =
-            $(evt.explicitOriginalTarget).closest(".accordion").attr("id")
+            const stackId = $stack.attr("id")
               .split("-")[1];
 
-          const blockId = $(evt.explicitOriginalTarget).closest(".block").data(
-            "value",
-          );
+            const blockId = $(evt.explicitOriginalTarget).closest(".block")
+              .data(
+                "value",
+              );
 
-          let blockIndex;
-          $(evt.explicitOriginalTarget).closest(".accordion").find(
-            ".block",
-          ).each((index, el) => {
-            if ($(el).data("value") == blockId) {
-              blockIndex = index + 1;
-            }
-          });
+            let blockIndex;
+            $stack.find(
+              ".block",
+            ).each((index, el) => {
+              if ($(el).data("value") == blockId) {
+                blockIndex = index + 1;
+              }
+            });
 
-          const ns = $(evt.explicitOriginalTarget).closest(".dash-page").data(
-            "ns",
-          );
+            const ns = $(evt.explicitOriginalTarget).closest(".dash-page").data(
+              "ns",
+            );
 
-          Shiny.setInputValue(
-            `${ns}-addBlock`,
-            {
-              stackId: stackId,
-              blockId: blockId,
-              blockIndex: blockIndex,
-              type: $(evt.item).data("type"),
-            },
-            { priority: "event" },
-          );
+            Shiny.setInputValue(
+              `${ns}-addBlock`,
+              {
+                stackId: stackId,
+                blockId: blockId,
+                blockIndex: blockIndex,
+                type: $(evt.item).data("type"),
+              },
+              { priority: "event" },
+            );
+          },
         },
-      },
-    );
+      );
+    });
   }, 300);
 });

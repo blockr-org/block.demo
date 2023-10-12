@@ -89,6 +89,9 @@ dash_module_server <- function(id){
           if(input$addBlock$type == "summarize")
             block <- summarize_block
 
+          if(input$addBlock$type == "data")
+            block <- data_block
+
           list(
             block = block,
             position = input$addBlock$blockIndex

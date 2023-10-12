@@ -71,26 +71,65 @@ ui <- function(req){
       id = "blocks-offcanvas",
       .position = "bottom",
       scroll = TRUE,
-      offcanvasHeader("Block"),
-      blockPill(
-        "Select"
-      ),
-      blockPill(
-        "Filter",
-        color = "info"
-      ),
-      blockPill(
-        "Plot",
-        color = "warning"
-      ),
-      blockPill(
-        "Group by",
-        type = "group_by",
-        color = "success"
-      ),
-      blockPill(
-        "Summarize",
-        color = "danger"
+      offcanvasHeader(h4("Blocks")),
+      div(
+        class = "row",
+        div(
+          class = "col-md-3",
+          h5("Data"),
+          div(
+            class = "block-wrapper",
+            blockPill(
+              "Data",
+              color = "secondary"
+            )
+          )
+        ),
+        div(
+          class = "col-md-3",
+          h5("Transform"),
+          div(
+            class = "block-wrapper",
+            blockPill(
+              "Select"
+            ),
+            blockPill(
+              "Filter",
+              color = "info"
+            ),
+            blockPill(
+              "Group by",
+              type = "group_by",
+              color = "success"
+            ),
+            blockPill(
+              "Summarize",
+              color = "danger"
+            )
+          )
+        ),
+        div(
+          class = "col-md-3",
+          h5("Visualise"),
+          div(
+            class = "block-wrapper",
+            blockPill(
+              "Plot",
+              color = "warning"
+            )
+          )
+        )
+      )
+    ),
+    div(
+      class = "toast-container position-fixed bottom-0 end-0 p-3",
+      div(
+        id = "toast",
+        class = "toast text-bg-warning",
+        div(
+          class = "toast-body",
+          id = "toast-body",
+        )
       )
     )
 	)
@@ -118,5 +157,5 @@ make_id <- function(){
 }
 
 blockPill <- function(title, type = tolower(title), color = "primary"){
-  span(title, `data-type` = type, class = sprintf("badge rounded-pill add-block bg-%s", color))
+  p(title, `data-type` = type, class = sprintf("badge w-100 add-block bg-%s", color))
 }
