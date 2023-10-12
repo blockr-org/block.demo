@@ -16,11 +16,12 @@ $(() => {
   });
 
   setTimeout(() => {
-    const draggable = $(document).find(".add-stack");
+    const draggable = $(document).find(".nav-link");
 
     sortable = new Sortable(
       draggable[0],
       {
+        draggable: ".add-stack",
         onStart: () => {
           $(".masonry-row").addClass("bg-secondary");
         },

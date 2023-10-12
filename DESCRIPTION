@@ -17,8 +17,7 @@ Imports:
     masonry,
     blockr,
     bmsui,
-    bsutils,
-    purrr
+    bsutils
 Suggests: 
   pkgload
 Remotes:

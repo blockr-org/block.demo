@@ -67,15 +67,7 @@ dash_module_server <- function(id){
           item = generate_ui(stack, id = ns(stack_id))
         )
 
-        rvs <- reactiveValues(new_blocks = NULL)
-
-        server <- generate_server(
-          stack, 
-          id = stack_id,
-          new_blocks = rvs$new_blocks
-        )
-
-        observeEvent(input$addBlock, {
+        add_block <- eventReactive(input$addBlock, {
           # it's for another stack
           if(input$addBlock$stackId != stack_id)
             return()
@@ -89,11 +81,17 @@ dash_module_server <- function(id){
           if(input$addBlock$type == "select")
             block <- select_block
 
-          rvs$new_blocks <- list(
+          list(
             block = block,
             position = input$addBlock$blockIndex
           )
         })
+
+        server <- generate_server(
+          stack, 
+          id = stack_id,
+          new_blocks = add_block
+        )
       })
     }
   )
