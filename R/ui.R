@@ -70,7 +70,7 @@ ui <- function(req){
     offcanvasContent(
       id = "blocks-offcanvas",
       .position = "bottom",
-      `data-bs-scroll` = "true",
+      scroll = TRUE,
       offcanvasHeader("Block"),
       blockPill(
         "Select"

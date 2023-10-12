@@ -2,6 +2,10 @@
   display: none;
 }
 
+.masonry-row:hover{
+  background-color: #EEE7E7;
+}
+
 .masonry-row:hover .remove-row{
   display: block;
 }

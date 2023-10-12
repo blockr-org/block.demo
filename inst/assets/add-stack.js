@@ -6,11 +6,16 @@ $(() => {
     }, 1000);
 
     $(".remove-row").on("click", (event) => {
-      const n =
-        $(event.target).closest(".masonry-grid").find(".masonry-row").length;
-      if (n == 1) {
-        return;
-      }
+      // capture stacks contained in the row
+      const stacks = [];
+      $(event.target).closest(".masonry-row").find(".stack").find(".accordion")
+        .each((_, el) => {
+          stacks.push($(el).attr("id"));
+        });
+
+      // remove row from DOM
+      const ns = $(event.target).closest(".dash-page").data("ns");
+      Shiny.setInputValue(`${ns}-removeRow`, { stacks: stacks });
       $(event.target).closest(".masonry-row").remove();
     });
   });

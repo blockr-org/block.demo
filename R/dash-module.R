@@ -54,6 +54,10 @@ dash_module_server <- function(id){
         )
       })
 
+      observeEvent(input$removeRow, {
+        print(input$removeRow)
+      })
+
       observeEvent(input$addStack, {
         stack_id <- make_id()
 
@@ -71,8 +75,6 @@ dash_module_server <- function(id){
           # it's for another stack
           if(input$addBlock$stackId != stack_id)
             return()
-
-          print(input$addBlock)
 
           block <- plot_block
           if(input$addBlock$type == "filter")
