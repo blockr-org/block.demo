@@ -124,8 +124,18 @@ $(() => {
               return;
             }
 
-            // check that transform blocks are added after data or other
-            // transform blocks, not after plot
+            // get the type of block the user wants to insert a
+            const insertType = $(`.block:eq(${blockIndex - 1})`).find(
+              "[data-block-type]",
+            ).data(
+              "block-type",
+            ).split(",");
+
+            if (insertType == "plot") {
+              $("#toast-body").text("Cannot insert a block after a plot block");
+              toast.show();
+              return;
+            }
 
             const ns = $(evt.explicitOriginalTarget).closest(".dash-page").data(
               "ns",

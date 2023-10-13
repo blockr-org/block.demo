@@ -36,7 +36,8 @@ ui <- function(req){
         actionButton(
           "addBlock",
           class = "button-secondary",
-          "Blocks"
+          "Blocks",
+          icon("cube")
         )
       )
     ),
@@ -72,6 +73,7 @@ ui <- function(req){
       .position = "bottom",
       scroll = TRUE,
       offcanvasHeader(h4("Blocks")),
+      p("Drag the block in the stack where you want to insert it."),
       div(
         class = "row",
         div(
@@ -81,6 +83,7 @@ ui <- function(req){
             class = "block-wrapper",
             blockPill(
               "Data",
+              class = "data_block",
               type = "dataset_block",
               color = "secondary"
             )
@@ -93,23 +96,28 @@ ui <- function(req){
             class = "block-wrapper",
             blockPill(
               "Select",
+              class = "transform_block",
               color = "info"
             ),
             blockPill(
               "Filter",
+              class = "transform_block",
               color = "info"
             ),
             blockPill(
               "Arrange",
+              class = "transform_block",
               color = "info"
             ),
             blockPill(
               "Group by",
+              class = "transform_block",
               type = "group_by_block",
               color = "warning"
             ),
             blockPill(
               "Summarize",
+              class = "transform_block",
               color = "warning"
             )
           )
@@ -121,10 +129,12 @@ ui <- function(req){
             class = "block-wrapper",
             blockPill(
               "Plot",
+              class = "output",
               color = "success"
             ),
             blockPill(
               "Plot2",
+              class = "output",
               type = "cheat",
               color = "success"
             )
@@ -167,6 +177,6 @@ make_id <- function(){
     (\(.) sprintf("_%s", .))()
 }
 
-blockPill <- function(title, type = paste0(tolower(title), "_block"), color = "primary"){
-  span(title, `data-type` = type, class = sprintf("badge add-block bg-%s", color))
+blockPill <- function(title, class, type = paste0(tolower(title), "_block"), color = "primary"){
+  span(title, icon("arrows-alt"), `data-class` = class, `data-type` = type, class = sprintf("badge add-block bg-%s", color))
 }
