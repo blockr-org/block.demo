@@ -81,6 +81,7 @@ ui <- function(req){
             class = "block-wrapper",
             blockPill(
               "Data",
+              type = "dataset_block",
               color = "secondary"
             )
           )
@@ -91,20 +92,25 @@ ui <- function(req){
           div(
             class = "block-wrapper",
             blockPill(
-              "Select"
+              "Select",
+              color = "info"
             ),
             blockPill(
               "Filter",
               color = "info"
             ),
             blockPill(
+              "Arrange",
+              color = "info"
+            ),
+            blockPill(
               "Group by",
-              type = "group_by",
-              color = "success"
+              type = "group_by_block",
+              color = "warning"
             ),
             blockPill(
               "Summarize",
-              color = "danger"
+              color = "warning"
             )
           )
         ),
@@ -115,7 +121,12 @@ ui <- function(req){
             class = "block-wrapper",
             blockPill(
               "Plot",
-              color = "warning"
+              color = "success"
+            ),
+            blockPill(
+              "Plot2",
+              type = "cheat",
+              color = "success"
             )
           )
         )
@@ -156,6 +167,6 @@ make_id <- function(){
     (\(.) sprintf("_%s", .))()
 }
 
-blockPill <- function(title, type = tolower(title), color = "primary"){
-  p(title, `data-type` = type, class = sprintf("badge w-100 add-block bg-%s", color))
+blockPill <- function(title, type = paste0(tolower(title), "_block"), color = "primary"){
+  span(title, `data-type` = type, class = sprintf("badge add-block bg-%s", color))
 }

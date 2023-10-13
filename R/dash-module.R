@@ -77,20 +77,26 @@ dash_module_server <- function(id){
             return()
 
           block <- plot_block
-          if(input$addBlock$type == "filter")
+          if(input$addBlock$type == "filter_block")
             block <- filter_block
 
-          if(input$addBlock$type == "select")
+          if(input$addBlock$type == "select_block")
             block <- select_block
 
-          if(input$addBlock$type == "group_by")
+          if(input$addBlock$type == "group_by_block")
             block <- group_by_block
 
-          if(input$addBlock$type == "summarize")
+          if(input$addBlock$type == "summarize_block")
             block <- summarize_block
 
-          if(input$addBlock$type == "data")
+          if(input$addBlock$type == "dataset_block")
             block <- data_block
+
+          if(input$addBlock$type == "arrange_block")
+            block <- arrange_block
+
+          if(input$addBlock$type == "cheat_block")
+            block <- cheat_block
 
           list(
             block = block,

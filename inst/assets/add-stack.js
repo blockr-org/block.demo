@@ -65,20 +65,37 @@ $(() => {
           draggable: ".add-block",
           onEnd: (evt) => {
             const $stack = $(evt.explicitOriginalTarget).closest(".accordion");
+
+            // it's not dropped in a stack
             if (!$stack.length) {
               $("#toast-body").text("Blocks must be dropped within a stack");
               toast.show();
               return;
             }
 
+            const blockType = $(evt.item).data("type");
+
+            // we get all block types in the stack
+            // to check whether the block to add is compatible
+            const blockTypes = [];
+            $(evt.explicitOriginalTarget).closest(".stack").find(
+              "[data-block-type]",
+            ).each((_, el) => {
+              const vals = $(el).data("block-type").split(",");
+              blockTypes.push(...vals);
+            });
+
+            // get stackId
             const stackId = $stack.attr("id")
               .split("-")[1];
 
+            // get block id
             const blockId = $(evt.explicitOriginalTarget).closest(".block")
               .data(
                 "value",
               );
 
+            // get index where the user wants to insert the block
             let blockIndex;
             $stack.find(
               ".block",
@@ -87,6 +104,28 @@ $(() => {
                 blockIndex = index + 1;
               }
             });
+
+            // check whether stack already has a data block
+            if (
+              blockTypes.includes("dataset_block") &&
+              blockType == "dataset_block"
+            ) {
+              $("#toast-body").text("This stack already includes a data block");
+              toast.show();
+              return;
+            }
+
+            // check whether stack already has a plot block
+            if (
+              blockTypes.includes("plot_block") && blockType == "plot_block"
+            ) {
+              $("#toast-body").text("This stack already includes a plot block");
+              toast.show();
+              return;
+            }
+
+            // check that transform blocks are added after data or other
+            // transform blocks, not after plot
 
             const ns = $(evt.explicitOriginalTarget).closest(".dash-page").data(
               "ns",
@@ -98,7 +137,7 @@ $(() => {
                 stackId: stackId,
                 blockId: blockId,
                 blockIndex: blockIndex,
-                type: $(evt.item).data("type"),
+                type: blockType,
               },
               { priority: "event" },
             );
