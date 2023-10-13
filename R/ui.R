@@ -83,6 +83,7 @@ ui <- function(req){
             class = "block-wrapper",
             blockPill(
               "Data",
+              icon("table"),
               class = "data_block",
               type = "dataset_block",
               color = "secondary"
@@ -96,27 +97,32 @@ ui <- function(req){
             class = "block-wrapper",
             blockPill(
               "Select",
+              icon("hand-pointer"),
               class = "transform_block",
               color = "info"
             ),
             blockPill(
               "Filter",
+              icon("filter"),
               class = "transform_block",
               color = "info"
             ),
             blockPill(
               "Arrange",
+              icon("sort"),
               class = "transform_block",
               color = "info"
             ),
             blockPill(
               "Group by",
+              icon("object-group"),
               class = "transform_block",
               type = "group_by_block",
               color = "warning"
             ),
             blockPill(
               "Summarize",
+              icon("layer-group"),
               class = "transform_block",
               color = "warning"
             )
@@ -129,11 +135,13 @@ ui <- function(req){
             class = "block-wrapper",
             blockPill(
               "Plot",
+              icon("chart-bar"),
               class = "output",
               color = "success"
             ),
             blockPill(
               "Plot2",
+              icon("chart-bar"),
               class = "output",
               type = "cheat",
               color = "success"
@@ -177,6 +185,6 @@ make_id <- function(){
     (\(.) sprintf("_%s", .))()
 }
 
-blockPill <- function(title, class, type = paste0(tolower(title), "_block"), color = "primary"){
-  span(title, icon("arrows-alt"), `data-class` = class, `data-type` = type, class = sprintf("badge add-block bg-%s", color))
+blockPill <- function(title, ..., class, type = paste0(tolower(title), "_block"), color = "primary"){
+  span(title, ..., `data-class` = class, `data-type` = type, class = sprintf("badge add-block bg-%s", color))
 }
