@@ -62,7 +62,8 @@ dash_module_server <- function(id){
         stack_id <- make_id()
 
         stack <- new_stack(
-          data_block
+          data_block,
+          name = "New Stack"
         )
         
         masonry_add_item(
@@ -71,10 +72,12 @@ dash_module_server <- function(id){
           item = generate_ui(stack, id = ns(stack_id))
         )
 
-        add_block <- eventReactive(input$addBlock, {
+        new_block <- eventReactive(input$addBlock, {
           # it's for another stack
           if(input$addBlock$stackId != stack_id)
             return()
+
+          print(input$addBlock)
 
           block <- plot_block
           if(input$addBlock$type == "filter_block")
@@ -107,7 +110,7 @@ dash_module_server <- function(id){
         server <- generate_server(
           stack, 
           id = stack_id,
-          new_blocks = add_block
+          new_blocks = new_block
         )
       })
     }

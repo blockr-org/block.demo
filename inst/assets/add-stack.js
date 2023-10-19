@@ -12,7 +12,7 @@ $(() => {
     $(".remove-row").on("click", (event) => {
       // capture stacks contained in the row
       const stacks = [];
-      $(event.target).closest(".masonry-row").find(".stack").find(".accordion")
+      $(event.target).closest(".masonry-row").find(".stack")
         .each((_, el) => {
           stacks.push($(el).attr("id"));
         });
@@ -64,7 +64,7 @@ $(() => {
         {
           draggable: ".add-block",
           onEnd: (evt) => {
-            const $stack = $(evt.explicitOriginalTarget).closest(".accordion");
+            const $stack = $(evt.explicitOriginalTarget).closest(".stack");
 
             // it's not dropped in a stack
             if (!$stack.length) {
@@ -105,6 +105,12 @@ $(() => {
               }
             });
 
+            if (!blockIndex) {
+              $("#toast-body").text("Could not find block index");
+              toast.show();
+              return;
+            }
+
             // check whether stack already has a data block
             if (
               blockTypes.includes("dataset_block") &&
@@ -125,9 +131,7 @@ $(() => {
             }
 
             // get the type of block the user wants to insert a
-            const insertType = $(`.block:eq(${blockIndex - 1})`).find(
-              "[data-block-type]",
-            ).data(
+            const insertType = $(`.block:eq(${blockIndex - 1})`).data(
               "block-type",
             ).split(",");
 

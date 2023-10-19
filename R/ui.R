@@ -125,6 +125,13 @@ ui <- function(req){
               icon("layer-group"),
               class = "transform_block",
               color = "warning"
+            ),
+            blockPill(
+              "Mutate",
+              icon("chart-bar"),
+              class = "output",
+              type = "cheat_block",
+              color = "warning"
             )
           )
         ),
@@ -137,13 +144,6 @@ ui <- function(req){
               "Plot",
               icon("chart-bar"),
               class = "output",
-              color = "success"
-            ),
-            blockPill(
-              "Plot2",
-              icon("chart-bar"),
-              class = "output",
-              type = "cheat",
               color = "success"
             )
           )
