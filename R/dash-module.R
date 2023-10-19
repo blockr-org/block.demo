@@ -112,6 +112,13 @@ dash_module_server <- function(id){
           id = stack_id,
           new_blocks = new_block
         )
+
+        observeEvent(server$remove, {
+          if(!server$remove)
+            return()
+
+          # TODO remove stack server-side
+        })
       })
     }
   )
