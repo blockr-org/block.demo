@@ -9,7 +9,6 @@
 #' @import masonry
 #' @import blockr
 #' @import bsutils
-#' @importFrom bslib bs_theme
 #' 
 #' @keywords internal
 ui <- function(req){
