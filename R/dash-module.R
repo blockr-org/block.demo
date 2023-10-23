@@ -101,6 +101,9 @@ dash_module_server <- function(id){
           if(input$addBlock$type == "cheat_block")
             block <- cheat_block
 
+          if(input$addBlock$type == "ggiraph")
+            block <- ggiraph_block
+
           list(
             block = block,
             position = input$addBlock$blockIndex

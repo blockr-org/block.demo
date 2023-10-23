@@ -144,6 +144,13 @@ ui <- function(req){
               icon("chart-bar"),
               class = "output",
               color = "success"
+            ),
+            blockPill(
+              "Interactive Plot",
+              icon("chart-bar"),
+              class = "output",
+              color = "success",
+              type = "ggiraph"
             )
           )
         )

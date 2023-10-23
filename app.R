@@ -7,6 +7,7 @@ pkgload::load_all(
 )
 
 library(blockr.data)
+library(ggiraph)
 
 options(shiny.fullstracktrace = TRUE)
 
