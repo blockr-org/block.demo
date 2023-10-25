@@ -19,7 +19,6 @@ $(() => {
 
       // remove row from DOM
       const ns = $(event.target).closest(".dash-page").data("ns");
-      console.log(stacks);
       Shiny.setInputValue(`${ns}-removeRow`, { stacks: stacks });
       $(event.target).closest(".masonry-row").remove();
     });
@@ -39,13 +38,13 @@ $(() => {
           $(".masonry-row").removeClass("bg-secondary");
         },
         onEnd: (evt) => {
-          $(evt.explicitOriginalTarget).closest(".masonry-row").removeClass(
+          $(evt.originalEvent.srcElement).closest(".masonry-row").removeClass(
             "bg-secondary",
           );
 
-          const rowID = $(evt.explicitOriginalTarget).closest(".masonry-row")
+          const rowID = $(evt.originalEvent.srcElement).closest(".masonry-row")
             .attr("id");
-          const ns = $(evt.explicitOriginalTarget).closest(".dash-page").data(
+          const ns = $(evt.originalEvent.srcElement).closest(".dash-page").data(
             "ns",
           );
           Shiny.setInputValue(`${ns}-addStack`, rowID, { priority: "event" });
@@ -65,7 +64,8 @@ $(() => {
         {
           draggable: ".add-block",
           onEnd: (evt) => {
-            const $stack = $(evt.explicitOriginalTarget).closest(".stack");
+            const target = evt.originalEvent.srcElement;
+            const $stack = $(target).closest(".stack");
 
             // it's not dropped in a stack
             if (!$stack.length) {
@@ -79,7 +79,7 @@ $(() => {
             // we get all block types in the stack
             // to check whether the block to add is compatible
             const blockTypes = [];
-            $(evt.explicitOriginalTarget).closest(".stack").find(
+            $(target).closest(".stack").find(
               "[data-block-type]",
             ).each((_, el) => {
               const vals = $(el).data("block-type").split(",");
@@ -91,7 +91,7 @@ $(() => {
               .split("-")[1];
 
             // get block id
-            const blockId = $(evt.explicitOriginalTarget).closest(".block")
+            const blockId = $(target).closest(".block")
               .data(
                 "value",
               );
@@ -142,7 +142,7 @@ $(() => {
               return;
             }
 
-            const ns = $(evt.explicitOriginalTarget).closest(".dash-page").data(
+            const ns = $(target).closest(".dash-page").data(
               "ns",
             );
 

@@ -1,3 +1,6 @@
+^renv$
+^renv\.lock$
 ^\.leprechaun$
 ^app\.R$
 ^makefile$
+^LICENSE\.md$
