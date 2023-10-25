@@ -48,9 +48,7 @@ ui <- function(req){
           class = "p-4",
           div(
             class = "card bg-secondary",
-            div(
-              class = "card-body",
-              h1("Block R"),
+            div( class = "card-body", h1("Block R"),
               h2("Build, transform, visualise"),
               p(
                 "Use the block system to transform your data",
@@ -85,6 +83,13 @@ ui <- function(req){
               icon("table"),
               class = "data_block",
               type = "dataset_block",
+              color = "secondary"
+            ),
+            blockPill(
+              "Join",
+              icon("table"),
+              class = "data_block",
+              type = "join_block",
               color = "secondary"
             )
           )
@@ -126,10 +131,10 @@ ui <- function(req){
               color = "warning"
             ),
             blockPill(
-              "Mutate",
+              "Factor",
               icon("chart-bar"),
-              class = "output",
-              type = "cheat_block",
+              class = "transform_block",
+              type = "as_factor_block",
               color = "warning"
             )
           )
@@ -143,14 +148,15 @@ ui <- function(req){
               "Plot",
               icon("chart-bar"),
               class = "output",
-              color = "success"
+              color = "success",
+              type = "plot_block"
             ),
             blockPill(
               "Interactive Plot",
               icon("chart-bar"),
               class = "output",
               color = "success",
-              type = "ggiraph"
+              type = "ggiraph_block"
             )
           )
         )

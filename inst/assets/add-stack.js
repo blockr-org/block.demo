@@ -4,9 +4,9 @@ $(() => {
   );
 
   $(document).on("masonry:added-row", (e) => {
-    $(`#${e.detail}`).addClass("bg-secondary");
+    $(`#${e.detail}`).addClass("border");
     setTimeout(() => {
-      $(`#${e.detail}`).removeClass("bg-secondary");
+      $(`#${e.detail}`).removeClass("border");
     }, 1000);
 
     $(".remove-row").on("click", (event) => {
@@ -19,6 +19,7 @@ $(() => {
 
       // remove row from DOM
       const ns = $(event.target).closest(".dash-page").data("ns");
+      console.log(stacks);
       Shiny.setInputValue(`${ns}-removeRow`, { stacks: stacks });
       $(event.target).closest(".masonry-row").remove();
     });

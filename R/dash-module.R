@@ -101,8 +101,14 @@ dash_module_server <- function(id){
           if(input$addBlock$type == "cheat_block")
             block <- cheat_block
 
-          if(input$addBlock$type == "ggiraph")
+          if(input$addBlock$type == "ggiraph_block")
             block <- ggiraph_block
+
+          if(input$addBlock$type == "join_block")
+            block <- join_block
+
+          if(input$addBlock$type == "as_factor_block")
+            block <- as_factor_block
 
           list(
             block = block,
