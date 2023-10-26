@@ -90,7 +90,7 @@ ui <- function(req){
         ),
         blockPill(
           "Join",
-          icon("table"),
+          icon("object-ungroup"),
           class = "data_block",
           type = "join_block",
           color = "secondary"

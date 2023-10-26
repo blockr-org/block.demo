@@ -111,7 +111,7 @@ dash_module_server <- function(id){
             block <- demo_join_block
 
           if(input$addBlock$type == "as_factor_block")
-            block <- as_factor_block
+            block <- asfactor_block
 
           list(
             block = block,
