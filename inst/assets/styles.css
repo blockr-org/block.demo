@@ -28,3 +28,6 @@
   cursor: pointer;
 }
 
+.masonry-row {
+  position: relative;
+}

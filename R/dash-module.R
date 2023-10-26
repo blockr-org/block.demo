@@ -157,7 +157,7 @@ newRow <- function(...){
 newRowRemoveUI <- function(){
   tags$button(
     icon("times"),
-    class = "btn bg-danger my-2 remove-row text-white",
+    class = "btn btn-sm bg-danger my-2 remove-row text-white position-absolute top-0 start-0",
     style = "margin-left:auto;"
   )
 }
