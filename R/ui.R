@@ -67,98 +67,93 @@ ui <- function(req){
     ),
     offcanvasContent(
       id = "blocks-offcanvas",
-      .position = "bottom",
+      .position = "end",
       scroll = TRUE,
       offcanvasHeader(h4("Blocks")),
       p("Drag the block in the stack where you want to insert it."),
+      h5("Data"),
       div(
-        class = "row",
-        div(
-          class = "col-md-3",
-          h5("Data"),
-          div(
-            class = "block-wrapper",
-            blockPill(
-              "Data",
-              icon("table"),
-              class = "data_block",
-              type = "dataset_block",
-              color = "secondary"
-            ),
-            blockPill(
-              "Join",
-              icon("table"),
-              class = "data_block",
-              type = "join_block",
-              color = "secondary"
-            )
-          )
+        class = "block-wrapper",
+        blockPill(
+          "Data",
+          icon("table"),
+          class = "data_block",
+          type = "dataset_block",
+          color = "secondary"
         ),
-        div(
-          class = "col-md-3",
-          h5("Transform"),
-          div(
-            class = "block-wrapper",
-            blockPill(
-              "Select",
-              icon("hand-pointer"),
-              class = "transform_block",
-              color = "info"
-            ),
-            blockPill(
-              "Filter",
-              icon("filter"),
-              class = "transform_block",
-              color = "info"
-            ),
-            blockPill(
-              "Arrange",
-              icon("sort"),
-              class = "transform_block",
-              color = "info"
-            ),
-            blockPill(
-              "Group by",
-              icon("object-group"),
-              class = "transform_block",
-              type = "group_by_block",
-              color = "warning"
-            ),
-            blockPill(
-              "Summarize",
-              icon("layer-group"),
-              class = "transform_block",
-              color = "warning"
-            ),
-            blockPill(
-              "Factor",
-              icon("chart-bar"),
-              class = "transform_block",
-              type = "as_factor_block",
-              color = "warning"
-            )
-          )
+        blockPill(
+          "CDISC",
+          icon("table"),
+          class = "cdisc_block",
+          type = "dataset_block",
+          color = "secondary"
         ),
-        div(
-          class = "col-md-3",
-          h5("Visualise"),
-          div(
-            class = "block-wrapper",
-            blockPill(
-              "Plot",
-              icon("chart-bar"),
-              class = "output",
-              color = "success",
-              type = "plot_block"
-            ),
-            blockPill(
-              "Interactive Plot",
-              icon("chart-bar"),
-              class = "output",
-              color = "success",
-              type = "ggiraph_block"
-            )
-          )
+        blockPill(
+          "Join",
+          icon("table"),
+          class = "data_block",
+          type = "join_block",
+          color = "secondary"
+        )
+      ),
+      h5("Transform"),
+      div(
+        class = "block-wrapper",
+        blockPill(
+          "Select",
+          icon("hand-pointer"),
+          class = "transform_block",
+          color = "info"
+        ),
+        blockPill(
+          "Filter",
+          icon("filter"),
+          class = "transform_block",
+          color = "info"
+        ),
+        blockPill(
+          "Arrange",
+          icon("sort"),
+          class = "transform_block",
+          color = "info"
+        ),
+        blockPill(
+          "Group by",
+          icon("object-group"),
+          class = "transform_block",
+          type = "group_by_block",
+          color = "info"
+        ),
+        blockPill(
+          "Summarize",
+          icon("layer-group"),
+          class = "transform_block",
+          color = "info"
+        ),
+        blockPill(
+          "Factor",
+          icon("chart-bar"),
+          class = "transform_block",
+          type = "as_factor_block",
+          color = "info"
+        )
+      ),
+      h5("Visualise"),
+      div(
+        class = "block-wrapper",
+        blockPill(
+          "Plot",
+          icon("chart-bar"),
+          class = "output",
+          color = "success",
+          type = "plot_block"
+        ),
+        blockPill(
+          "Interactive Plot",
+          icon("chart-bar"),
+          class = "output",
+          color = "success",
+          type = "ggiraph_block"
         )
       )
     ),
@@ -198,5 +193,5 @@ make_id <- function(){
 }
 
 blockPill <- function(title, ..., class, type = paste0(tolower(title), "_block"), color = "primary"){
-  span(title, ..., `data-class` = class, `data-type` = type, class = sprintf("badge add-block bg-%s", color))
+  p(title, ..., `data-class` = class, `data-type` = type, class = sprintf("mb-1 w-100 badge add-block bg-%s", color))
 }
