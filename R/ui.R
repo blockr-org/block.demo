@@ -124,6 +124,13 @@ ui <- function(req){
           class = "transform_block",
           type = "as_factor_block",
           color = "info"
+        ),
+        blockPill(
+          "Top",
+          icon("bars"),
+          class = "transform_block",
+          type = "head_block",
+          color = "info"
         )
       ),
       h5("Visualise"),

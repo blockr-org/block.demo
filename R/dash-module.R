@@ -109,6 +109,9 @@ dash_module_server <- function(id){
 
           if(input$addBlock$type == "join_block")
             block <- demo_join_block
+          
+          if(input$addBlock$type == "head_block")
+            block <- head_block
 
           if(input$addBlock$type == "as_factor_block")
             block <- asfactor_block
