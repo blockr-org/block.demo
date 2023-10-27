@@ -17,7 +17,7 @@ dashModuleUI <- function(id){
       ),
       div(
         class = "flex-shrink-1",
-        actionButton(ns("addRow"), "Row", icon = icon("plus"), class = "bg-secondary")
+        actionButton(ns("addRow"), "Row", icon = icon("plus"), class = "bg-secondary add-row")
       )
     ),
     togglerTextInput(

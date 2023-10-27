@@ -51,6 +51,12 @@ ui <- function(req){
           "insertTab",
           "Add tab"
         )
+      ),
+      sidebarItemAny(
+        switchInput(
+          "lock",
+          "lock"
+        )
       )
     ),
     offcanvasContent(

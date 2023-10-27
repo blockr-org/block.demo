@@ -1,4 +1,16 @@
 $(() => {
+  $("#lock").on("change", (event) => {
+    $(".add-stack").toggle();
+    $("#addBlock").toggle();
+    $("#insertTab").toggle();
+    $(".stack-remove").toggle();
+    $(".stack-edit-toggle").toggle();
+    $(".stack-copy-code").toggle();
+    $(".btn-trigger-text").off("click");
+    $(".remove-row").toggleClass("d-none");
+    $(".add-row").toggle();
+  });
+
   const toast = bootstrap.Toast.getOrCreateInstance(
     document.getElementById("toast"),
   );
