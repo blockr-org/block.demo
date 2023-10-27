@@ -129,7 +129,7 @@
       "RemoteRepo": "blockr",
       "RemoteUsername": "blockr-org",
       "RemoteRef": "HEAD",
-      "RemoteSha": "44012a20fe4317d0556cad0c18a2a0d05f580bc4",
+      "RemoteSha": "c1a3c4e9d91c6794182f5e56840ddd2e05675601",
       "Requirements": [
         "DT",
         "blockr.data",
@@ -145,7 +145,7 @@
         "sortable",
         "utils"
       ],
-      "Hash": "8ab143e8cfd8cdf77e994b08ee0d8910"
+      "Hash": "079a4106eb9b08fba1b0432e65a9b511"
     },
     "blockr.data": {
       "Package": "blockr.data",
@@ -229,7 +229,7 @@
     },
     "checkmate": {
       "Package": "checkmate",
-      "Version": "2.2.0",
+      "Version": "2.3.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -237,7 +237,7 @@
         "backports",
         "utils"
       ],
-      "Hash": "ca9c113196136f4a9ca9ce6079c2c99e"
+      "Hash": "ed4275b13c6ab74b89a31def0b6bf835"
     },
     "cli": {
       "Package": "cli",
@@ -720,14 +720,14 @@
       "RemoteRepo": "masonry",
       "RemoteUsername": "blockr-org",
       "RemoteRef": "HEAD",
-      "RemoteSha": "07f0ad26af5497e7712864f8c187861671747b69",
+      "RemoteSha": "02f1befbc37d94251259181e300bd4e870df7e56",
       "Requirements": [
         "htmltools",
         "htmlwidgets",
         "jsonlite",
         "shiny"
       ],
-      "Hash": "d96878eb5a9048488349c8fdbe05734d"
+      "Hash": "36493c77185e54c2a01a0164c9abccf6"
     },
     "memoise": {
       "Package": "memoise",

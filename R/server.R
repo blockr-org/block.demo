@@ -29,4 +29,6 @@ server <- function(input, output, session){
   observeEvent(input$addBlock, {
     offcanvas_show("blocks-offcanvas")
   })
+
+  home_server("home")
 }

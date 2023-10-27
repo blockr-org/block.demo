@@ -1,5 +1,6 @@
 .remove-row{
   display: none;
+  top: -.5rem;
 }
 
 .masonry-row:hover{
@@ -31,3 +32,4 @@
 .masonry-row {
   position: relative;
 }
+

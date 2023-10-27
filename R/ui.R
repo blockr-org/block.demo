@@ -44,19 +44,7 @@ ui <- function(req){
       title = h3("Menu", class = "mt-0 pt-0"),
       sidebarItem(
         "Home",
-        div(
-          class = "p-4",
-          div(
-            class = "card bg-secondary",
-            div( class = "card-body", h1("Block R"),
-              h2("Build, transform, visualise"),
-              p(
-                "Use the block system to transform your data",
-                "and visualise it."
-              )
-            )
-          )
-        )
+        homeUI("home")
       ),
       sidebarItemAny(
         togglerTextInput(
