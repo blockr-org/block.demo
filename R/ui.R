@@ -120,7 +120,7 @@ ui <- function(req){
         ),
         blockPill(
           "Factor",
-          icon("box-stacked"),
+          icon("boxes"),
           class = "transform_block",
           type = "as_factor_block",
           color = "info"
