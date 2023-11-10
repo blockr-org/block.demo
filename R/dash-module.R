@@ -51,9 +51,10 @@ dash_module_server <- function(id, save){ # nolint
         masonry_get_config(sprintf("%s-grid", gsub(" ", "", id)) |> ns())
       }, ignoreInit = TRUE)
 
+      state <- reactiveVal()
       observeEvent(input[[sprintf("%s-grid_config", gsub(" ", "", id))]], {
         c <- input[[sprintf("%s-grid_config", gsub(" ", "", id))]]
-        conf_tab_set_stacks(id, c)
+        state(c)
       })
 
       observeEvent(input$addRow, {
@@ -144,6 +145,8 @@ dash_module_server <- function(id, save){ # nolint
           # TODO remove stack server-side
         })
       })
+
+      return(state)
     }
   )
 }

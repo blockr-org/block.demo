@@ -28,7 +28,8 @@ server <- function(input, output, session){
     conf_tab_add(input$insertTab, input$insertTab)
     select_sidebar_item(input$insertTab)
 
-    dash_module_server(input$insertTab, save)
+    s <- dash_module_server(input$insertTab, save)
+    states$x <- c(states$x, s)
     mason(sprintf("#%s-grid", gsub(" ", "", input$insertTab)))
   })
 
