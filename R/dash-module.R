@@ -27,7 +27,7 @@ dashModuleUI <- function(id){
       restore = TRUE
     ),
     masonryGrid(
-      id = sprintf("%s-grid", gsub(" ", "", id)),
+      id = sprintf("%s-grid", gsub(" ", "", id)) |> ns(),
       styles = list(
         rows = list(
           margin = "1rem",
@@ -41,15 +41,24 @@ dashModuleUI <- function(id){
   )
 }
 
-dash_module_server <- function(id){
+dash_module_server <- function(id, save){ # nolint
   moduleServer(
     id, 
     function(input, output, session){
       ns <- session$ns
 
+      observeEvent(save(), {
+        masonry_get_config(sprintf("%s-grid", gsub(" ", "", id)) |> ns())
+      }, ignoreInit = TRUE)
+
+      observeEvent(input[[sprintf("%s-grid_config", gsub(" ", "", id))]], {
+        c <- input[[sprintf("%s-grid_config", gsub(" ", "", id))]]
+        conf_tab_set_stacks(id, c)
+      })
+
       observeEvent(input$addRow, {
         masonry_add_row(
-          sprintf("#%s-grid", gsub(" ", "", id)), 
+          sprintf("#%s-grid", gsub(" ", "", ns(id))), 
           newRowRemoveUI()
         )
       })
@@ -67,7 +76,7 @@ dash_module_server <- function(id){
         )
         
         masonry_add_item(
-          sprintf("#%s-grid", gsub(" ", "", id)), 
+          sprintf("#%s-grid", gsub(" ", "", ns(id))), 
           row_id = sprintf("#%s", input$addStack),
           item = generate_ui(stack, id = ns(stack_id))
         )
@@ -149,7 +158,7 @@ card <- \(...){
   )
 }
 
-newRow <- function(...){
+newRow <- function(...){ # nolint
   masonryRow(
     classes = "position-relative",
     newRowRemoveUI(),
@@ -157,7 +166,7 @@ newRow <- function(...){
   )
 }
 
-newRowRemoveUI <- function(){
+newRowRemoveUI <- function(){ # nolint
   tags$button(
     icon("times"),
     class = "btn btn-sm bg-danger my-2 remove-row text-white position-absolute start-0",

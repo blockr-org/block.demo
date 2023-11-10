@@ -14,7 +14,9 @@
 ui <- function(req){
   assets()
 
-	bmsPage(
+  x <- 1L
+
+  bmsPage(
     masonryDependencies(),
     tags$head(
       tags$script(src = "static/add-stack.js"),
@@ -56,6 +58,13 @@ ui <- function(req){
         switchInput(
           "lock",
           "lock"
+        )
+      ),
+      sidebarItemAny(
+        actionButton(
+          "save",
+          "save",
+          width = "100%"
         )
       )
     ),
@@ -169,7 +178,7 @@ ui <- function(req){
         )
       )
     )
-	)
+  )
 }
 
 #' Assets
