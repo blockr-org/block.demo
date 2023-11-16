@@ -25,13 +25,12 @@ server <- function(input, output, session){
   })
 
   observeEvent(saved(), {
-    print(conf_serialise())
     conf_serialise() |>
       writeLines("conf.json")
   }, ignoreInit = TRUE)
 
   observe({
-    conf_restore(conf, save)
+    conf_restore(conf, save, saved)
   })
 
   observeEvent(input$addBlock, {

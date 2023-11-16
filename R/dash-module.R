@@ -13,8 +13,8 @@ dashModuleUI <- function( # nolint
       div(
         class = "flex-grow-1",
         togglerTextInput(
-          ns(title),
-          h1(tools::toTitleCase(id)),
+          ns("title"),
+          h1(title),
           value = id,
           restore = TRUE
         )
@@ -68,10 +68,9 @@ dash_module_server <- function(id, save){ # nolint
         masonry_get_config(sprintf("%s-grid", gsub(" ", "", id)) |> ns())
       }, ignoreInit = TRUE)
 
-      state <- reactiveVal()
+      state <- reactiveValues(layout = list(), stacks = list())
       observeEvent(input[[sprintf("%s-grid_config", gsub(" ", "", id))]], {
-        c <- input[[sprintf("%s-grid_config", gsub(" ", "", id))]]
-        state(c)
+        state$layout <- input[[sprintf("%s-grid_config", gsub(" ", "", id))]]
       })
 
       observeEvent(input$addRow, {
@@ -85,6 +84,7 @@ dash_module_server <- function(id, save){ # nolint
         print(input$removeRow)
       })
 
+      stacks <- list()
       observeEvent(input$addStack, {
         stack_id <- make_id()
 
@@ -103,8 +103,6 @@ dash_module_server <- function(id, save){ # nolint
           # it's for another stack
           if(input$addBlock$stackId != stack_id)
             return()
-
-          print(input$addBlock)
 
           block <- plot_block
           if(input$addBlock$type == "filter_block")
@@ -154,6 +152,10 @@ dash_module_server <- function(id, save){ # nolint
           id = stack_id,
           new_blocks = new_block
         )
+
+        observeEvent(server$stack, {
+          state$stacks[[stack_id]] <<- lapply(server$stack, as_list)
+        })
 
         observeEvent(server$remove, {
           if(!server$remove)

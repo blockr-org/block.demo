@@ -11,7 +11,7 @@
 #' 
 #' @keywords internal
 leprechaun_handler_df <- function(data){
-	do.call("rbind", lapply(data))
+  do.call("rbind", lapply(data))
 }
 
 #' Input List
@@ -24,21 +24,21 @@ leprechaun_handler_df <- function(data){
 #' 
 #' @keywords internal
 leprechaun_handler_list <- function(data){
-	return(data)
+  return(data)
 }
 
 .onAttach <- function(...) {
-	shiny::registerInputHandler(
-		"block.demo.list", 
-		leprechaun_handler_list, 
-		force = TRUE
-	)
+  shiny::registerInputHandler(
+    "block.demo.list", 
+    leprechaun_handler_list, 
+    force = TRUE
+  )
 
-	shiny::registerInputHandler(
-		"block.demo.df", 
-		leprechaun_handler_df, 
-		force = TRUE
-	)
+  shiny::registerInputHandler(
+    "block.demo.df", 
+    leprechaun_handler_df, 
+    force = TRUE
+  )
 }
 
 #---------------------------------------------#

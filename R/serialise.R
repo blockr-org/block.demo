@@ -13,8 +13,8 @@ conf_layout_set <- \(tab, config){
   env$config$tabs[[tab]]$layout <- config
 }
 
-conf_tab_set_stacks <- \(id, stacks) {
-  env$config[[id]]$stacks <- as.list(stacks)
+conf_stacks_set <- \(id, stacks) {
+  env$config$tabs[[id]]$stacks <- stacks
 }
 
 conf_get <- \(){

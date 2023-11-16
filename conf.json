@@ -1,0 +1,81 @@
+{
+  "tabs": {
+    "Test": {
+      "id": "Test",
+      "title": "A test",
+      "description": "A test description",
+      "layout": {
+        "grid": [
+          {
+            "id": "_7766489",
+            "items": [
+              {
+                "width": 461.267,
+                "id": "_9306718",
+                "childId": "Test-_428obgcw1vefmqtydk5x976zujrhpialsn3",
+                "percentage": 29
+              },
+              {
+                "width": 1154.73,
+                "id": "_4530276",
+                "childId": "Test-_q3hwavlkjgyz12bnfusrcp8me64i59xo7dt",
+                "percentage": 71
+              }
+            ]
+          }
+        ]
+      },
+      "stacks": {
+        "_q3hwavlkjgyz12bnfusrcp8me64i59xo7dt": [
+          {
+            "dataset": {
+              "value": "lab",
+              "choices": ["ae", "demo", "exposure", "lab", "merged_data"],
+              "multiple": false
+            }
+          },
+          {
+            "columns": {
+              "value": "STUDYID",
+              "choices": ["structure(function (data) ", "colnames(data), result = c(\"STUDYID\", \"DOMAIN\", \"USUBJID\", \"LBSEQ\", ", "\"LBTESTCD\", \"LBTEST\", \"LBCAT\", \"LBORRES\", \"LBORRESU\", \"LBORNRLO\", ", "\"LBORNRHI\", \"LBSTRESC\", \"LBSTRESN\", \"LBSTRESU\", \"LBSTNRLO\", \"LBSTNRHI\", ", "\"LBNRIND\", \"LBBLFL\", \"VISITNUM\", \"VISIT\", \"VISITDY\", \"LBDTC\", ", "\"LBDY\"))"],
+              "multiple": true
+            },
+            "values": {
+              "value": {
+                "STUDYID": ""
+              },
+              "sub_fields": ["structure(function (data, columns) ", "{", "    determine_field <- function(x) {", "        switch(class(x), factor = select_field, numeric = range_field, ", "            string_field)", "    }", "    field_args <- function(x) {", "        switch(class(x), factor = list(levels(x)[1L], choices = levels(x)), ", "            numeric = list(range(x), min = min(x), max = max(x)), ", "            list())", "    }", "    cols <- data[, columns, drop = FALSE]", "    ctor <- lapply(cols, determine_field)", "    args <- lapply(cols, field_args)", "    Map(do.call, ctor, args)", "}, result = list(STUDYID = structure(list(value = \"\"), type = \"literal\", class = c(\"string_field\", ", "\"field\"), exclude = FALSE)))"]
+            },
+            "filter_func": {
+              "value": "==",
+              "choices": ["==", "!=", "!startsWith", "startsWith", "grepl", ">", "<", ">=", "<="],
+              "multiple": false
+            },
+            "expression": {
+              "value": ["structure(function (data, values, filter_func) ", "{", "    filter_exp <- function(cls, col, val) {", "        if (is.null(val)) {", "            return(quote(TRUE))", "        }", "        switch(cls, numeric = bquote(dplyr::between(.(column), ", "            ..(values)), list(column = as.name(col), values = val), ", "            splice = TRUE), bquote(eval(call(.(filter_func), ", "            .(column), .(value))), list(column = as.name(col), ", "            value = val, filter_func = filter_func)))", "    }", "    cols <- names(values)", "    Reduce(function(x, y) bquote(.(lhs) | .(rhs), list(lhs = x, ", "        rhs = y)), Map(filter_exp, chr_ply(data[, cols, drop = FALSE], ", "        class), cols, values))", "}, result = eval(call(\"==\", STUDYID, \"\")))"]
+            },
+            "submit": {
+              "value": 0
+            }
+          }
+        ],
+        "_428obgcw1vefmqtydk5x976zujrhpialsn3": [
+          {
+            "dataset": {
+              "value": "lab",
+              "choices": ["ae", "demo", "exposure", "lab", "merged_data"],
+              "multiple": false
+            }
+          },
+          {
+            "columns": {
+              "value": "STUDYID",
+              "choices": ["structure(function (data) ", "colnames(data), result = c(\"STUDYID\", \"DOMAIN\", \"USUBJID\", \"LBSEQ\", ", "\"LBTESTCD\", \"LBTEST\", \"LBCAT\", \"LBORRES\", \"LBORRESU\", \"LBORNRLO\", ", "\"LBORNRHI\", \"LBSTRESC\", \"LBSTRESN\", \"LBSTRESU\", \"LBSTNRLO\", \"LBSTNRHI\", ", "\"LBNRIND\", \"LBBLFL\", \"VISITNUM\", \"VISIT\", \"VISITDY\", \"LBDTC\", ", "\"LBDY\"))"],
+              "multiple": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

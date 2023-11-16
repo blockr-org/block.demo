@@ -20,8 +20,10 @@ insert_tab <- \(
   s <- dash_module_server(id, save)
 
   # nested observeEvent is ugly: to change
-  observeEvent(s(), {
-    conf_layout_set(id, s())
+  observeEvent({s$stacks; s$layout}, { # nolint
+    print("here")
+    conf_layout_set(id, s$layout)
+    conf_stacks_set(id, s$stacks)
     saved(!saved())
   }, ignoreInit = TRUE)
 
