@@ -4,14 +4,9 @@ env$config <- list(
 )
 
 conf_tab_set <- \(id, title = "Title", description = "Description"){
-  env$config$tabs[[id]] <- list(
-    list(
-      id = id,
-      title = title,
-      description = description,
-      stacks = list()
-    )
-  )
+  env$config$tabs[[id]]$id <- id
+  env$config$tabs[[id]]$title <- title
+  env$config$tabs[[id]]$description <- description
 }
 
 conf_layout_set <- \(tab, config){
@@ -33,4 +28,20 @@ conf_serialise <- \(){
       auto_unbox = TRUE,
       pretty = TRUE
     )
+}
+
+conf_restore <- \(conf, save, saved) {
+  lapply(conf$tabs, \(tab) {
+    print(tab)
+
+    insert_tab(
+      tab$id, 
+      save, 
+      saved, 
+      tab$title, 
+      tab$description
+    )
+    
+    masonry_restore_config(sprintf("%s-%s-grid", tab$id, gsub(" ", "", tab$id)), tab$layout)
+  })
 }

@@ -21,6 +21,7 @@ Imports:
   bsutils
 Suggests: 
   pkgload,
+  jsonlite,
   blockr.data
 Remotes:
   blockr-org/blockr,

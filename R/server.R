@@ -21,33 +21,27 @@ server <- function(input, output, session){
     if(input$insertTab == "")
       return()
 
-    # insert the tab into the custom dashboard
-    insert_sidebar_item(
-      input$insertTab,
-      dashModuleUI(input$insertTab)
-    )
-
-    conf_tab_set(input$insertTab, input$insertTab)
-    select_sidebar_item(input$insertTab)
-
-    s <- dash_module_server(input$insertTab, save)
-
-    # nested observeEvent is ugly: to change
-    observeEvent(s(), {
-      conf_layout_set(input$insertTab, s())
-      saved(!saved())
-    }, ignoreInit = TRUE)
-
-    mason(sprintf("#%s-grid", gsub(" ", "", input$insertTab)))
+    insert_tab(input$insertTab, save, saved, select = TRUE)
   })
 
   observeEvent(saved(), {
-    conf_serialise() |> print()
+    print(conf_serialise())
+    conf_serialise() |>
+      writeLines("conf.json")
+  }, ignoreInit = TRUE)
+
+  observe({
+    conf_restore(conf, save)
   })
 
   observeEvent(input$addBlock, {
     offcanvas_show("blocks-offcanvas")
   })
+
+  # read conf
+  conf <- list()
+  if(file.exists("conf.json"))
+    conf <- jsonlite::read_json("conf.json")
 
   home_server("home")
 }

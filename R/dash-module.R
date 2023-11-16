@@ -1,4 +1,8 @@
-dashModuleUI <- function(id){
+dashModuleUI <- function( # nolint
+  id, 
+  title = tools::toTitleCase(id), 
+  description = "description"
+){
   ns <- NS(id)
 
   div(
@@ -9,20 +13,25 @@ dashModuleUI <- function(id){
       div(
         class = "flex-grow-1",
         togglerTextInput(
-          make_id(),
-          h1(id),
+          ns(title),
+          h1(tools::toTitleCase(id)),
           value = id,
           restore = TRUE
         )
       ),
       div(
         class = "flex-shrink-1",
-        actionButton(ns("addRow"), "Row", icon = icon("plus"), class = "bg-secondary add-row")
+        actionButton(
+          ns("addRow"), 
+          "Row", 
+          icon = icon("plus"), 
+          class = "bg-secondary add-row"
+        )
       )
     ),
     togglerTextInput(
-      make_id(),
-      p("Description"),
+      ns("description"),
+      p(description),
       value = "Page description",
       restore = TRUE
     ),
@@ -46,6 +55,14 @@ dash_module_server <- function(id, save){ # nolint
     id, 
     function(input, output, session){
       ns <- session$ns
+
+      observeEvent(input$title, {
+        conf_tab_set(id, input$title, input$description)
+      })
+
+      observeEvent(input$description, {
+        conf_tab_set(id, input$title, input$description)
+      })
 
       observeEvent(save(), {
         masonry_get_config(sprintf("%s-grid", gsub(" ", "", id)) |> ns())
