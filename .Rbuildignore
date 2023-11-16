@@ -4,3 +4,4 @@
 ^app\.R$
 ^makefile$
 ^LICENSE\.md$
+^\.lintr$

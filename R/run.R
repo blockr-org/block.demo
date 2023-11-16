@@ -8,11 +8,11 @@
 #' 
 #' @export 
 run <- function(...){
-	shinyApp(
-		ui = ui,
-		server = server,
-		...
-	)
+  shinyApp(
+    ui = ui,
+    server = server,
+    ...
+  )
 }
 
 #' Run Development
@@ -22,6 +22,6 @@ run <- function(...){
 #' 
 #' @keywords internal
 run_dev <- function(){
-	file <- system.file("run/app.R", package = "block.demo")
-	shiny::shinyAppFile(file)
+  file <- system.file("run/app.R", package = "block.demo")
+  shiny::shinyAppFile(file)
 }

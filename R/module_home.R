@@ -3,14 +3,14 @@
 #' @param id Unique id for module instance.
 #' 
 #' @keywords internal
-homeUI <- function(id){
-	ns <- NS(id)
+homeUI <- function(id){ # nolint
+  ns <- NS(id)
 
   div(
     class = "p-4",
     div(
       class = "card bg-secondary",
-      div( class = "card-body", h1("Block"),
+      div(class = "card-body", h1("Block"),
         h2("Build, transform, visualise"),
         p(
           "Use the block system to transform your data",
@@ -104,19 +104,19 @@ homeUI <- function(id){
 #' 
 #' @keywords internal
 home_server <- function(id){
-	moduleServer(
-		id,
-		function(
-			input, 
-			output, 
-			session
-			){
-				
-				ns <- session$ns
-				send_message <- make_send_message(session)
+  moduleServer(
+    id,
+    function(
+      input, 
+      output, 
+      session
+    ){
+      
+      ns <- session$ns
+      send_message <- make_send_message(session)
 
-				# your code here
-		}
-	)
+      # your code here
+    }
+  )
 }
 

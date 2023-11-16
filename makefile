@@ -7,6 +7,6 @@ document:
 install: check
 	Rscript -e "devtools::install()"
 
-run: 
+dev: 
 	Rscript app.R
 
