@@ -3,13 +3,14 @@ insert_tab <- \(
   save, 
   saved, 
   title = tools::toTitleCase(id), 
-  description = "description",
-  select = FALSE
+  description = "Description",
+  select = FALSE,
+  nrows = 0L
 ){
   # insert the tab into the custom dashboard
   insert_sidebar_item(
     id,
-    dashModuleUI(id, title, description)
+    dashModuleUI(id, title, description, nrows = nrows)
   )
 
   conf_tab_set(id, title)
@@ -21,7 +22,6 @@ insert_tab <- \(
 
   # nested observeEvent is ugly: to change
   observeEvent({s$stacks; s$layout}, { # nolint
-    print("here")
     conf_layout_set(id, s$layout)
     conf_stacks_set(id, s$stacks)
     saved(!saved())

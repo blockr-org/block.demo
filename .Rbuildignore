@@ -5,3 +5,4 @@
 ^makefile$
 ^LICENSE\.md$
 ^\.lintr$
+^conf\.json$

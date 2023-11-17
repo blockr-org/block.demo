@@ -1,9 +1,18 @@
 dashModuleUI <- function( # nolint
   id, 
   title = tools::toTitleCase(id), 
-  description = "description"
+  description = "description",
+  nrows = 0L
 ){
   ns <- NS(id)
+
+  rows <- NULL
+  rows <- seq_len(nrows) |>
+    lapply(\(i) {
+      masonryRow(
+        newRowRemoveUI()
+      )
+    })
 
   div(
     class = "p-4 dash-page",
@@ -45,7 +54,8 @@ dashModuleUI <- function( # nolint
         items = list(
           margin = ".5rem"
         )
-      )
+      ),
+      rows
     )
   )
 }

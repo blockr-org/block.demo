@@ -31,5 +31,6 @@
 
 .masonry-row {
   position: relative;
+  min-height: 5rem;
 }
 

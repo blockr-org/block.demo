@@ -39,7 +39,8 @@ conf_restore <- \(conf, save, saved) {
       save, 
       saved, 
       tab$title, 
-      tab$description
+      tab$description,
+      nrows = length(tab$layout$grid)
     )
     
     masonry_restore_config(sprintf("%s-%s-grid", tab$id, gsub(" ", "", tab$id)), tab$layout)
