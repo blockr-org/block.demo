@@ -88,14 +88,14 @@ ui <- function(req){
           "CDISC",
           icon("table"),
           class = "cdisc_block",
-          type = "dataset_block",
+          type = "demo_data_block",
           color = "secondary"
         ),
         blockPill(
           "Join",
           icon("object-ungroup"),
           class = "data_block",
-          type = "join_block",
+          type = "demo_join_block",
           color = "secondary"
         )
       ),
@@ -117,7 +117,7 @@ ui <- function(req){
         blockPill(
           "Arrange",
           icon("sort"),
-          class = "transform_block",
+          class = "demo_data_block",
           color = "info"
         ),
         blockPill(

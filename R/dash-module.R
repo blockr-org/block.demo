@@ -114,42 +114,8 @@ dash_module_server <- function(id, save){ # nolint
           if(input$addBlock$stackId != stack_id)
             return()
 
-          block <- plot_block
-          if(input$addBlock$type == "filter_block")
-            block <- filter_block
-
-          if(input$addBlock$type == "cdisc_block")
-            block <- demo_data_block 
-
-          if(input$addBlock$type == "select_block")
-            block <- select_block
-
-          if(input$addBlock$type == "group_by_block")
-            block <- demo_group_by_block
-
-          if(input$addBlock$type == "summarize_block")
-            block <- demo_summarize_block
-
-          if(input$addBlock$type == "dataset_block")
-            block <- data_block
-
-          if(input$addBlock$type == "arrange_block")
-            block <- demo_arrange_block
-
-          if(input$addBlock$type == "cheat_block")
-            block <- cheat_block
-
-          if(input$addBlock$type == "ggiraph_block")
-            block <- ggiraph_block
-
-          if(input$addBlock$type == "join_block")
-            block <- demo_join_block
-          
-          if(input$addBlock$type == "head_block")
-            block <- head_block
-
-          if(input$addBlock$type == "as_factor_block")
-            block <- asfactor_block
+          # dangerous
+          block <- eval(parse(text = input$addBlock$type))
 
           list(
             block = block,
