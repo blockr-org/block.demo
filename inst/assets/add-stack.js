@@ -50,6 +50,7 @@ $(() => {
         $(".masonry-row").removeClass("bg-secondary");
       },
       onEnd: (evt) => {
+        console.log(evt);
         $(evt.originalEvent.srcElement)
           .closest(".masonry-row")
           .removeClass("bg-secondary");

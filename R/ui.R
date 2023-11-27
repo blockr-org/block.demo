@@ -4,9 +4,7 @@
 #' 
 #' @param req The request object.
 #' 
-#' @import shiny
-#' @import bmsui
-#' @import masonry
+#' @import shiny @import bmsui @import masonry
 #' @import blockr
 #' @import bsutils
 #' 
@@ -53,20 +51,20 @@ ui <- function(req){
           "insertTab",
           "Add tab"
         )
-      ),
-      sidebarItemAny(
-        switchInput(
-          "lock",
-          "lock"
-        )
-      ),
-      sidebarItemAny(
-        actionButton(
-          "save",
-          "save",
-          width = "100%"
-        )
       )
+      #sidebarItemAny(
+      #  switchInput(
+      #    "lock",
+      #    "lock"
+      #  )
+      #),
+      #sidebarItemAny(
+      #  actionButton(
+      #    "save",
+      #    "save",
+      #    width = "100%"
+      #  )
+      #)
     ),
     offcanvasContent(
       id = "blocks-offcanvas",
@@ -131,13 +129,14 @@ ui <- function(req){
           "Summarize",
           icon("layer-group"),
           class = "transform_block",
+          type = "demo_summarize_block",
           color = "info"
         ),
         blockPill(
           "Factor",
           icon("boxes"),
           class = "transform_block",
-          type = "as_factor_block",
+          type = "asfactor_block",
           color = "info"
         ),
         blockPill(

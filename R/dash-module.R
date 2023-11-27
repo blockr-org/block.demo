@@ -129,10 +129,6 @@ dash_module_server <- function(id, save){ # nolint
           new_blocks = new_block
         )
 
-        observeEvent(server$stack, {
-          state$stacks[[stack_id]] <<- lapply(server$stack, as_list)
-        })
-
         observeEvent(server$remove, {
           if(!server$remove)
             return()
